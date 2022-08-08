@@ -1,0 +1,42 @@
+pm.test("Extract resource_id", function () {
+     var jsonData = pm.response.json();
+    pm.expect(jsonData).to.have.property('id');
+    pm.collectionVariables.set("product_id", jsonData.id);
+});
+
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(201);
+});
+const response=pm.response.json();
+console.log(response.name);
+console.log(response['name']);
+
+pm.test("name should be t-shirt", function(){
+    pm.expect(response.name).to.eql("t-shirt");
+  
+});
+
+    pm.test("Content-Type is present", function () {
+        pm.response.to.have.header("Content-Type");
+    });
+
+    //pm.test("Body is correct", function () {
+      //  pm.response.to.have.body("name");
+    //});
+
+ 
+    pm.test("Successful POST request", function () {
+        pm.expect(pm.response.code).to.be.oneOf([200, 201]);
+    }); 
+
+    const response1=pm.response.json();
+    console.log(response1.id);
+   
+pm.globals.set("name","t-shirt");
+pm.environment.set("description","can change any thing")
+
+var res=pm.globals.get("name");
+console.log(res);
+
+var res1=pm.globals.get("description");
+console.log(res1);
